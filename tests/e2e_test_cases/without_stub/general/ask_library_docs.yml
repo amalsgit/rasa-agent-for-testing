@@ -4,8 +4,6 @@ test_cases:
       - user: "how do I do server actions in next.js?"
         assertions:
           - flow_started: "ask_library_docs"
-      - user: "next.js"
-        assertions:
           - slot_was_set:
               - name: "library_name"
                 value: "next.js"

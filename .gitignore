@@ -9,3 +9,4 @@ __pycache__/
 models/
 .DS_Store
 docs/superpowers/specs/
+results/
