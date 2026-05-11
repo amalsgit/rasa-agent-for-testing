@@ -1,0 +1,12 @@
+flows:
+  code_assist:
+    name: Code assist
+    description: >
+      Helps with a small code question — counting lines, running a regex
+      against a snippet, or looking up a library API via Context7. Use when the
+      user asks for code-style help on a snippet or a quick syntax question.
+    steps:
+      - collect: code_question
+        description: >
+          The user's full code-related question, including any snippet to operate on.
+      - call: code_buddy

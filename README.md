@@ -46,9 +46,15 @@ If you change dependencies in `pyproject.toml`, run `uv lock` to refresh `uv.loc
 This template provides a foundation for building conversational agents with:
 - **Basic conversational flows**: Greetings, help, feedback, and human handoff
 - **Help system**: Users can ask for assistance and get guided responses
-- **Public GitHub repository Q&A**: Ask about an `owner/repo` on GitHub; a **ReAct sub-agent** calls the **DeepWiki** MCP server so answers stay grounded in that repository’s documentation
+- **Public GitHub repository Q&A**: Ask about an `owner/repo` on GitHub; a **ReAct sub-agent** (`sub_agents/deepwiki_github/`) calls the **DeepWiki** MCP server so answers stay grounded in that repository's documentation
+- **Library documentation Q&A**: Ask about a software library; a **ReAct sub-agent** (`sub_agents/library_docs/`) calls the **Context7** MCP server, resolves the library id, and fetches docs to answer (`data/general/ask_library_docs.yml`)
+- **Library id lookup via direct MCP `call` step**: Skip the sub-agent loop and invoke a Context7 tool straight from a flow (`data/general/lookup_library_id.yml`)
+- **Code assist with custom Python tools**: A **ReAct sub-agent** (`sub_agents/code_buddy/`) extends `MCPOpenAgent` with two Python tools — `count_lines` and `regex_search` — alongside Context7 docs lookup (`data/general/code_assist.yml`)
+- **Book a demo (task-specific sub-agent)**: A **task-specific ReAct sub-agent** (`sub_agents/book_demo_agent/`) collects name, email, and time via auto-generated `set_slot_*` tools driven by `exit_if` on the flow's `call` step (`data/general/book_demo.yml`)
 - **Feedback collection**: Gather user feedback to improve the agent
 - **Human handoff**: Seamlessly transfer conversations to human agents when needed
+
+The E2E tests under `tests/e2e_test_cases/without_stub/` call the live Context7 and DeepWiki MCP servers — they may be slow or flaky if those services are unavailable.
 
 ## 📁 Directory Structure
 

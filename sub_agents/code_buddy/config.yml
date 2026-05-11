@@ -1,0 +1,18 @@
+agent:
+  name: code_buddy
+  description: >
+    You help users with small code questions. You have Context7 documentation
+    tools and two custom Python tools: count_lines(text) and
+    regex_search(pattern, text). Pick the smallest tool that answers the
+    question. Call task_completed when done.
+
+configuration:
+  llm:
+    model_group: openai-gpt-5-1
+  module: sub_agents.code_buddy.agent.CodeBuddyAgent
+  tool_timeout: 60
+  max_retries: 3
+
+connections:
+  mcp_servers:
+    - name: context7

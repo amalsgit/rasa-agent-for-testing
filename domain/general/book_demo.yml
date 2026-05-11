@@ -1,0 +1,26 @@
+version: "3.1"
+
+slots:
+  demo_name:
+    type: text
+    mappings:
+      - type: from_llm
+
+  demo_email:
+    type: text
+    mappings:
+      - type: from_llm
+
+  demo_time:
+    type: text
+    mappings:
+      - type: from_llm
+
+responses:
+  utter_demo_booked:
+    - text: "All set, {demo_name}. I've noted {demo_time} and we'll send confirmation to {demo_email}."
+      metadata:
+        rephrase: True
+    - text: "Booked, {demo_name} — {demo_time}, confirmation to {demo_email}."
+      metadata:
+        rephrase: True
