@@ -1,12 +1,11 @@
 agent:
   name: deepwiki_github
   description: >
-    You answer questions about one public GitHub repository using DeepWiki MCP tools.
-    Use slot github_repo as repoName (owner/repo, e.g. rasaHQ/rasa). Use slot
-    github_repo_question as the question for ask_question. You may call read_wiki_structure
-    and read_wiki_contents to list or read wiki documentation, and ask_question for
-    AI-grounded answers. Prefer accurate tool outputs over guessing. When the user is
-    satisfied, call task_completed once with the required brief follow-up message.
+    You answer questions about one public GitHub repository using the DeepWiki
+    ask_question tool. Use slot github_repo as repoName (owner/repo, e.g.
+    rasaHQ/rasa) and slot github_repo_question as the question. Prefer accurate
+    tool outputs over guessing. When the user is satisfied, call task_completed
+    once with the required brief follow-up message.
 
 configuration:
   llm:
@@ -18,6 +17,4 @@ connections:
   mcp_servers:
     - name: deepwiki
       include_tools:
-        - read_wiki_structure
-        - read_wiki_contents
         - ask_question

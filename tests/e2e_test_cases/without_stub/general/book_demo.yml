@@ -1,0 +1,6 @@
+test_cases:
+  - test_case: book demo flow starts
+    steps:
+      - user: "I'd like to book a product demo"
+        assertions:
+          - flow_started: "book_demo"

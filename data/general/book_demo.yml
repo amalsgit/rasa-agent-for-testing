@@ -1,0 +1,14 @@
+flows:
+  book_demo:
+    name: Book demo
+    description: >
+      Books a product demo by collecting the user's name, email, and preferred
+      time. Use when the user wants to schedule, book, or arrange a demo, call,
+      or meeting.
+    steps:
+      - call: book_demo_agent
+        exit_if:
+          - slots.demo_name is not null
+          - slots.demo_email is not null
+          - slots.demo_time is not null
+      - action: utter_demo_booked

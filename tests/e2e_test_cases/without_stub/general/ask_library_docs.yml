@@ -1,0 +1,9 @@
+test_cases:
+  - test_case: ask library docs starts and collects library name
+    steps:
+      - user: "how do I do server actions in next.js?"
+        assertions:
+          - flow_started: "ask_library_docs"
+          - slot_was_set:
+              - name: "library_name"
+                value: "next.js"

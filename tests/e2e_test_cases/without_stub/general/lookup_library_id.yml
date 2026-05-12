@@ -1,0 +1,11 @@
+test_cases:
+  - test_case: lookup library id flow starts
+    steps:
+      - user: "resolve the context7 library id for next.js"
+        assertions:
+          - flow_started: "lookup_library_id"
+      - user: "next.js"
+        assertions:
+          - slot_was_set:
+              - name: "library_name"
+                value: "next.js"

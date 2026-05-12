@@ -1,0 +1,17 @@
+{
+  "mcpServers": {
+    "rasa-tools": {
+      "command": "/Users/amal/Rasa/rasa-agent-for-testing/.venv/bin/python",
+      "args": [
+        "-m",
+        "rasa",
+        "tools",
+        "run",
+        "--mode",
+        "stdio",
+        "--project-path",
+        "/Users/amal/Rasa/rasa-agent-for-testing"
+      ]
+    }
+  }
+}

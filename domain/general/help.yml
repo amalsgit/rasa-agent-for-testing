@@ -5,18 +5,26 @@ slots:
     type: text
     initial_value: |
       - What can you do?
-      - Ask about a public GitHub repo using DeepWiki (e.g. how does X work in rasaHQ/rasa?)
+      - Ask about a public GitHub repo via DeepWiki (e.g. how does X work in rasaHQ/rasa?)
+      - Look up docs for a library on Context7 (e.g. how do server actions work in next.js?)
+      - Get the Context7 library id for a library
+      - Ask a small code question (count lines, regex search)
+      - Book a product demo
       - Connect me to a human
       - Browse FAQs
     mappings:
       - type: controlled
 
-responses: 
+responses:
   utter_what_can_you_do:
     - text: |
-        I can help you with a few basics like:
-        - Answering questions about a public GitHub repository (owner/repo), grounded in that repo's docs via DeepWiki
-        - Connecting you to a human
+        I can help you with a few things:
+        - Answer questions about a public GitHub repository (owner/repo), grounded in DeepWiki
+        - Look up documentation for a software library via Context7
+        - Resolve the Context7 library id for a named library
+        - Help with a small code question (counting lines, regex search)
+        - Book a product demo (name, email, time)
+        - Connect you to a human
         - Help you try out the FAQs
         - Collect your feedback
       metadata:
