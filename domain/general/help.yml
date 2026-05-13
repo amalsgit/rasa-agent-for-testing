@@ -12,6 +12,13 @@ slots:
       - Book a product demo
       - Connect me to a human
       - Browse FAQs
+      - Inspector testing: "inspector test direct mcp success"
+      - Inspector testing: "inspector test custom tool success"
+      - Inspector testing: "inspector test custom tool failure"
+      - Inspector testing: "inspector test agent success"
+      - Inspector testing: "inspector test memory and buttons"
+      - Inspector testing: "inspector test agent timeout"
+      - Inspector testing: "inspector test action failure"
     mappings:
       - type: controlled
 
@@ -27,5 +34,12 @@ responses:
         - Connect you to a human
         - Help you try out the FAQs
         - Collect your feedback
-      metadata:
-        rephrase: True
+
+        Inspector testing:
+        - "inspector test direct mcp success"
+        - "inspector test custom tool success"
+        - "inspector test custom tool failure"
+        - "inspector test agent success"
+        - "inspector test memory and buttons"
+        - "inspector test agent timeout"
+        - "inspector test action failure"

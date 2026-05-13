@@ -56,6 +56,66 @@ This template provides a foundation for building conversational agents with:
 
 The E2E tests under `tests/e2e_test_cases/without_stub/` call the live Context7 and DeepWiki MCP servers — they may be slow or flaky if those services are unavailable.
 
+## Next-gen Inspector trace scenarios
+
+This project includes explicit `inspector_*` diagnostic flows for manually testing
+the next-gen Inspector. Run the assistant with:
+
+```bash
+uv run rasa inspect --nextgen
+```
+
+When validating or training these flows from the command line, load endpoints so
+direct MCP call steps can resolve their configured servers:
+
+```bash
+uv run rasa data validate --endpoints endpoints.yml
+uv run rasa train
+```
+
+The diagnostic prompts are also listed in the greeting and help responses under
+an "Inspector testing" section. They are intentionally literal so they can be
+reused later in Playwright tests.
+
+| Trigger prompt | Scenario | Expected Inspector surface | Expected UI signal | Stability |
+| --- | --- | --- | --- | --- |
+| `"inspector test direct mcp success"` | Direct Context7 MCP tool call from a flow | Events, Event details, Memory | `mcp_tool_executed` row for `resolve-library-id`; `inspector_resolved_library_id` slot set | Stable when Context7 is reachable |
+| `"inspector test custom tool success"` | ReAct sub-agent calls a diagnostic Python tool | Events, Event details, History | `agent_started` / `agent_completed`; tool row for `inspector_success_marker` | Stable when LLM/tool loop chooses the instructed tool |
+| `"inspector test custom tool failure"` | ReAct sub-agent calls a diagnostic Python tool that returns `is_error=True` | Events, Event details, History | Tool error row for `inspector_failure_marker` with error details | Stable when LLM/tool loop chooses the instructed tool |
+| `"inspector test agent success"` | Existing `library_docs` ReAct sub-agent completes normally | Events, History | Agent lifecycle row and Completed timeline item | Stable when Context7 is reachable |
+| `"inspector test memory and buttons"` | Slot collection, buttons, custom payload, and rephrased bot response | Memory, Bot details, Events | `inspector_memory_note` and `inspector_trace_mode` slots; buttons/custom payload on bot response | Stable |
+| `"inspector test agent timeout"` | ReAct sub-agent with `tool_timeout: 1` calls live Context7 | Events, Event details, History | Timeout or failure details on agent/tool rows; active or failed agent timeline state | Live edge; behavior depends on Context7 latency |
+| `"inspector test direct mcp failure"` | Direct MCP call against `inspector_unreachable_mcp` | Events, Event details | MCP connection failure from a flow call step | Live edge; intentionally unreachable local endpoint |
+| `"inspector test action failure"` | Custom action raises a real exception | Events, Event details | Action failure details for `action_inspector_raise_failure`; conversation may require restart | Stable failure probe |
+
+Live-edge scenarios are diagnostic probes, not reliable assistant behavior tests.
+They intentionally depend on network state, Context7/DeepWiki behavior, and short
+timeouts. If a raw action failure leaves the conversation in an error state,
+restart the conversation before running the next scenario.
+
+Do not add an always-on ReAct sub-agent that points at an unreachable MCP server:
+ReAct sub-agents connect to their MCP servers during Inspector startup, so that
+configuration prevents the Inspector from loading. To manually verify that
+startup-failure path, temporarily add a sub-agent connected to
+`inspector_unreachable_mcp`, run `uv run rasa inspect --nextgen`, confirm startup
+fails with MCP connection details, and then remove the sub-agent again.
+
+### Future Inspector E2E targets
+
+These manual traces are intended to become next-gen Inspector Playwright coverage
+later in `rasa-private/rasa/core/channels/inspector-nextgen/e2e/tests`.
+
+| Automation priority | Trigger prompt | Tracker event type | Inspector view | Assertion target |
+| --- | --- | --- | --- | --- |
+| High | `"inspector test direct mcp success"` | `mcp_tool_executed`, `slot` | Events, Event details, Memory | Tool name, arguments/result panel, resolved slot |
+| High | `"inspector test custom tool failure"` | `agent_started`, `mcp_tool_executed`, `agent_completed` | Events, Event details, History | Tool error dot and error message details |
+| High | `"inspector test action failure"` | `action` with failure metadata | Events, Event details | Action failure affordance and error message |
+| Medium | `"inspector test memory and buttons"` | `slot`, `bot` | Memory, Bot details | Slot grouping, buttons, custom payload, rephrase details |
+| Medium | `"inspector test agent success"` | `agent_started`, `agent_completed` | History | Completed agent timeline entry |
+| Medium | `"inspector test agent timeout"` | `agent_started`, failure or timeout metadata | Events, History | Timeout/failure presentation without hanging the UI |
+| Medium | `"inspector test direct mcp failure"` | `mcp_tool_executed` or internal error flow metadata | Events, Event details | Direct MCP failure details |
+| Low | Manual unreachable ReAct sub-agent startup probe | Startup failure before tracker events | Startup/error handling | Inspector startup failure reporting for unreachable sub-agent MCP server |
+
 ## 📁 Directory Structure
 
 ```

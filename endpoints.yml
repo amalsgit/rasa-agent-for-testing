@@ -87,3 +87,7 @@ mcp_servers:
   - name: context7
     url: https://mcp.context7.com/mcp
     type: http
+  # Inspector diagnostic MCP — intentionally unreachable for manual failure probes.
+  - name: inspector_unreachable_mcp
+    url: http://127.0.0.1:9/mcp
+    type: http

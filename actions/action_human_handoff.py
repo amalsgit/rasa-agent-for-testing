@@ -38,3 +38,16 @@ class ActionHumanHandoff(Action):
             response="utter_transfer_to_manager", summary=summarised_conversation
         )
         return []
+
+
+class ActionInspectorRaiseFailure(Action):
+    def name(self) -> Text:
+        return "action_inspector_raise_failure"
+
+    async def run(
+        self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: DomainDict
+    ) -> List[Dict[Text, Any]]:
+        raise RuntimeError(
+            "Inspector diagnostic action failure requested by "
+            "action_inspector_raise_failure."
+        )
