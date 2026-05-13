@@ -1,0 +1,44 @@
+<svg width="160" height="40" viewBox="0 0 160 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background with gradient -->
+  <rect width="160" height="40" rx="6" fill="#5A17EE"/>
+  <rect width="160" height="40" rx="6" fill="url(#gradient)" opacity="0.2"/>
+  
+  <!-- Gradient definition -->
+  <defs>
+    <linearGradient id="gradient" x1="0" y1="0" x2="0" y2="40" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#2B1B44" stop-opacity="0.3"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Rocket Icon - Solid Design -->
+  <g transform="translate(14, 8)">
+    <!-- Rocket Body -->
+    <path d="M8 4 Q8 0 10 0 Q12 0 12 4 L12 16 L8 16 Z" fill="white"/>
+    
+    <!-- Left Fin -->
+    <path d="M8 12 L4 18 L8 16 Z" fill="white"/>
+    
+    <!-- Right Fin -->
+    <path d="M12 12 L16 18 L12 16 Z" fill="white"/>
+    
+    <!-- Window -->
+    <circle cx="10" cy="7" r="2" fill="#5A17EE"/>
+    
+    <!-- Flame/Exhaust -->
+    <path d="M8.5 16 L8 20 L10 18.5 L12 20 L11.5 16 Z" fill="white" opacity="0.8"/>
+  </g>
+  
+  <!-- Text: "Launch on" -->
+  <text x="40" y="15" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="500" fill="white" opacity="0.9">
+    Launch on
+  </text>
+  
+  <!-- Text: "Hello Rasa" -->
+  <text x="40" y="28" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="600" fill="white">
+    Hello Rasa
+  </text>
+  
+  <!-- Subtle border for depth -->
+  <rect width="160" height="40" rx="6" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+</svg>

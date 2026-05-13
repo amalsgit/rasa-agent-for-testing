@@ -1,6 +1,8 @@
 # Test this out on hello rasa:
 
-[![Launch on Hello Rasa](https://hello.rasa.com/launch.svg)](https://hello.rasa.com/go?repo=amalsgit/rasa-agent-for-testing)
+[![Launch on Hello Rasa Prod](launch-prod.svg)](https://hello.rasa.com/go?repo=amalsgit/rasa-agent-for-testing)
+[![Launch on Hello Rasa Staging](launch-staging.svg)](https://staging.hello.rasa.com/go?repo=amalsgit/rasa-agent-for-testing)
+[![Launch on Hello Rasa Localhost](launch-localhost.svg)](http://localhost:5173/go?repo=amalsgit/rasa-agent-for-testing)
 
 
 # Basic Rasa Template
