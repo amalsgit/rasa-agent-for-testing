@@ -2,9 +2,14 @@ version: "3.1"
 
 responses:
   utter_hello:
-    - text: >
-        Hi — I can answer questions about a public GitHub repo (e.g.
-        rasaHQ/rasa), look up docs for a library on Context7, help with a small
-        code question, or book you a product demo. What would you like to try?
-      metadata:
-        rephrase: True
+    - text: |
+        Hi — I can answer questions about a public GitHub repo (e.g. rasaHQ/rasa), look up docs for a library on Context7, help with a small code question, or book you a product demo.
+
+        Inspector testing:
+        - "inspector test direct mcp success"
+        - "inspector test custom tool success"
+        - "inspector test custom tool failure"
+        - "inspector test agent success"
+        - "inspector test memory and buttons"
+        - "inspector test agent timeout"
+        - "inspector test action failure"
